@@ -31,8 +31,6 @@ jobs:
       - name: Run migrations
         run: dotnet ef database update -c ApplicationDatabaseContext -p HealthCheckWEB -s HealthCheckWEB
         env:
-          NootsDB: ${{ secrets.DEV_NOOTS_API_DB_CONNECTION }} # Store your connection string as a secret in your repository settings
-          NootsWorkersDB: ${{ secrets.DEV_NOOTS_WORKER_DB_CONNECTION  }}
           HealthCheckerDatabaseConn: ${{ secrets.DEV_NOOTS_HEALTH_CHECK_DB_CONNECTION }}
 
   # define the job to build and publish the docker image
