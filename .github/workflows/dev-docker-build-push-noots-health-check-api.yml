@@ -31,7 +31,7 @@ jobs:
       - name: Run migrations
         run: dotnet ef database update -c ApplicationDatabaseContext -p HealthCheckWEB -s HealthCheckWEB
         env:
-          HealthCheckerDatabaseConnection: ${{ secrets.DEV_NOOTS_HEALTH_CHECK_DB_CONNECTION }}
+          HealthCheckerDatabaseConnection: ${{ secrets.DEV_HEALTH_CHECK_DB_CONNECTION }}
 
   # define the job to build and publish the docker image
   build-and-push-docker-image:
@@ -50,7 +50,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v5
         with:
-          images: nootsstorm/noots-health-check-api
+          images: nootsstorm/xnotes-health-check-api
           tags: type=raw,value={{branch}}-{{sha}}
       -
         name: Set up QEMU
@@ -70,7 +70,7 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           context: .
-          file: ./pipeline-files/noots-health-check-api.dockerfile
+          file: ./pipeline-files/health-check-api.dockerfile
           push: ${{ github.event_name != 'pull_request' }}
           tags: ${{ steps.meta.outputs.tags }}
 
@@ -93,7 +93,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v5
         with:
-          images: nootsstorm/noots-health-check-api
+          images: nootsstorm/xnotes-health-check-api
           tags: type=raw,value={{branch}}-{{sha}}
 
       - name: Log in to Azure

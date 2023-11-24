@@ -1,1 +1,1 @@
-docker build -t davydq/noots-health-check-api . -f pipeline-files/health-check/noots-health-check-api.dockerfile
+docker build -t davydq/xnotes-health-check-api . -f pipeline-files/health-check/xnotes-health-check-api.dockerfile
