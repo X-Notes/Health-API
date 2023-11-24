@@ -9,7 +9,7 @@ WORKDIR /src
 COPY HealthCheckWEB/ source/
 RUN dotnet restore "source/HealthCheckWEB.csproj"
 COPY . .
-WORKDIR "/src/source/HealthCheckWEB"
+WORKDIR "/src/source"
 RUN dotnet build "HealthCheckWEB.csproj" -c Release -o /app/build
 
 FROM build AS publish
