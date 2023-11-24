@@ -6,7 +6,7 @@ ENV ASPNETCORE_ENVIRONMENT DockerDev
 
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
-COPY Backend/HealthCheckerWEB/ source/
+COPY HealthCheckerWEB/ source/
 RUN dotnet restore "source/HealthCheckWEB/HealthCheckWEB.csproj"
 COPY . .
 WORKDIR "/src/source/HealthCheckWEB"
