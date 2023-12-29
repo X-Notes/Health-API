@@ -113,7 +113,7 @@ jobs:
           containerAppName: health-check
           resourceGroup: XNotesDev
           containerAppEnvironment: managedEnvironment-XNotesDev-9d7c
-          environmentVariables: HealthCheckUIUri=secretref:health-uri Azure__StorageConnection=secretref:storage-connection Redis__Connection=secretref:redis-connection Redis__Password=secretref:redis-password APIDatabaseConnection=secretref:api-database-connection HealthCheckerDatabaseConnection=secretref:health-database-connection WorkerDatabaseConnection=secretref:worker-database-connection
+          environmentVariables: HealthCheckUIUri=secretref:health-url Azure__StorageConnection=secretref:storage-connection Redis__Connection=secretref:redis-connection Redis__Password=secretref:redis-password APIDatabaseConnection=secretref:api-database-connection HealthCheckerDatabaseConnection=secretref:health-database-connection WorkerDatabaseConnection=secretref:worker-database-connection
 
       - name: Build and deploy Config
         uses: azure/container-apps-deploy-action@v1
@@ -123,4 +123,4 @@ jobs:
           resourceGroup: XNotesDev
           yamlConfigPath: pipeline-files/dev-api.yaml
           containerAppEnvironment: managedEnvironment-XNotesDev-9d7c
-          environmentVariables: HealthCheckUIUri=secretref:health-uri Azure__StorageConnection=secretref:storage-connection Redis__Connection=secretref:redis-connection Redis__Password=secretref:redis-password APIDatabaseConnection=secretref:api-database-connection HealthCheckerDatabaseConnection=secretref:health-database-connection WorkerDatabaseConnection=secretref:worker-database-connection
+          environmentVariables: HealthCheckUIUri=secretref:health-url Azure__StorageConnection=secretref:storage-connection Redis__Connection=secretref:redis-connection Redis__Password=secretref:redis-password APIDatabaseConnection=secretref:api-database-connection HealthCheckerDatabaseConnection=secretref:health-database-connection WorkerDatabaseConnection=secretref:worker-database-connection
