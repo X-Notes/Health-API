@@ -50,6 +50,8 @@ builder.Services.AddHealthChecks()
                 .AddCheck<AzureBlobStorageHealthChecker>("AzureBlobStorageChecker");
 
 
+Console.WriteLine("healthCheckUIUri: " + healthCheckUIUri);
+
 builder.Services.AddHealthChecksUI(setup =>
                 {
                     setup.SetEvaluationTimeInSeconds(5);
