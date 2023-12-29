@@ -96,7 +96,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v5
         with:
-          images: xnotes/health-check-api
+          images: xnotes/health-check
           tags: type=raw,value={{branch}}-{{sha}}
 
       - name: Log in to Azure
