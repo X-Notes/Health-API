@@ -121,5 +121,6 @@ jobs:
           imageToDeploy: ${{ steps.meta.outputs.tags }}
           containerAppName: health-check
           resourceGroup: XNotesDev
+          yamlConfigPath: pipeline-files/dev-api.yaml
           containerAppEnvironment: managedEnvironment-XNotesDev-9d7c
           environmentVariables: Azure__StorageConnection=secretref:storage-connection Redis__Connection=secretref:redis-connection Redis__Password=secretref:redis-password APIDatabaseConnection=secretref:api-database-connection HealthCheckerDatabaseConnection=secretref:health-database-connection WorkerDatabaseConnection=secretref:worker-database-connection
