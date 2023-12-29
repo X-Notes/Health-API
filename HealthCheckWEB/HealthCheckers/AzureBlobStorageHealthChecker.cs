@@ -16,22 +16,8 @@ namespace HealthCheckWEB.HealthCheckers
         {
             try
             {
-                var container = blobServiceClient.GetBlobContainerClient("health-check");
-                var isExistContainer = await container.ExistsAsync();
-                if (!isExistContainer)
-                {
-                    return HealthCheckResult.Degraded("Container does not exist");
-                }
-
-                var blobClient = container.GetBlobClient("health.txt");
-                var isExistBlob = await blobClient.ExistsAsync();
-                if (!isExistBlob)
-                {
-                    return HealthCheckResult.Degraded("Blob does not exist");
-                }
-
+                var statistic = await blobServiceClient.GetPropertiesAsync(cancellationToken);
                 return HealthCheckResult.Healthy("Blob storage healthy");
-
             }
             catch (Exception e)
             {

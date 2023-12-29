@@ -2,6 +2,7 @@ using DatabaseContext;
 using DatabaseContext.Models;
 using HealthChecks.UI.Client;
 using HealthCheckWEB.HealthCheckers;
+using HealthCheckWEB.Models;
 using HealthCheckWEB.Models.Azure;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.EntityFrameworkCore;
@@ -17,6 +18,8 @@ var configBuilder = new ConfigurationBuilder()
     .AddEnvironmentVariables();
 
 builder.Configuration.AddConfiguration(configBuilder.Build());
+
+var redisConfig = builder.Configuration.GetSection("Redis").Get<RedisConfig>();
 
 // INIT IDENTITY DB
 var healthCheckDbConnection = builder.Configuration.GetSection("HealthCheckerDatabaseConnection").Value;
@@ -38,7 +41,8 @@ builder.Services.AddDaprClient();
 
 // HEALTH CHECKER
 builder.Services.AddHealthChecks()
-                .AddElasticsearch(elasticConnection)
+                // .AddElasticsearch(elasticConnection)
+                .AddRedis($"{redisConfig.Connection},password={redisConfig.Password}")
                 .AddNpgSql(apiDbConnection, name: "X Notes Database")
                 .AddNpgSql(healthCheckDbConnection, name: "Health check Database")
                 .AddNpgSql(workerDbConnection, name: "Worker Database")
@@ -79,7 +83,7 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 // HEALTH CHECK
-// API URL /healthchecks-ui
+    // API URL /healthchecks-ui
 app.MapHealthChecksUI().RequireAuthorization();
 // app.UseHealthChecksUI(config => config.UIPath = "/app-health");
 
