@@ -49,9 +49,6 @@ builder.Services.AddHealthChecks()
                 .AddNpgSql(workerDbConnection, name: "Worker Database")
                 .AddCheck<AzureBlobStorageHealthChecker>("AzureBlobStorageChecker");
 
-
-Console.WriteLine("healthCheckUIUri: " + healthCheckUIUri);
-
 builder.Services.AddHealthChecksUI(setup =>
                 {
                     setup.SetEvaluationTimeInSeconds(5);
