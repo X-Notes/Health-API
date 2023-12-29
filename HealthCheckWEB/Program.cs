@@ -33,6 +33,7 @@ builder.Services.AddControllersWithViews();
 
 var apiDbConnection = builder.Configuration.GetSection("APIDatabaseConnection").Value;
 var elasticConnection = builder.Configuration.GetSection("ElasticConfiguration:Uri").Value;
+var healthCheckUIUri = builder.Configuration.GetSection("HealthCheckUIUri").Value;
 var storageConfig = builder.Configuration.GetSection("Azure").Get<AzureConfig>();
 
 var workerDbConnection = builder.Configuration.GetSection("WorkerDatabaseConnection").Value;
@@ -52,7 +53,7 @@ builder.Services.AddHealthChecks()
 builder.Services.AddHealthChecksUI(setup =>
                 {
                     setup.SetEvaluationTimeInSeconds(5);
-                    setup.AddHealthCheckEndpoint("APPS", $"app-health");
+                    setup.AddHealthCheckEndpoint("APPS", healthCheckUIUri);
                 })
                 .AddInMemoryStorage();
 
@@ -85,7 +86,6 @@ app.UseAuthorization();
 // HEALTH CHECK
     // API URL /healthchecks-ui
 app.MapHealthChecksUI().RequireAuthorization();
-// app.UseHealthChecksUI(config => config.UIPath = "/app-health");
 
 app.MapHealthChecks("/app-health", new HealthCheckOptions
 {
