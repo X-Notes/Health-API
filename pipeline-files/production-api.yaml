@@ -1,0 +1,11 @@
+properties:
+  configuration:
+    ingress:
+      external: true
+      allowInsecure: false
+      targetPort: 80
+    dapr:
+      appId: health
+      appPort: 80
+      appProtocol: http
+      enabled: true
